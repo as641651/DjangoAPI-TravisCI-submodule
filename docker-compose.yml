@@ -2,7 +2,7 @@ version: "3"
 
 # Default image name will be djangoapi-travisci-submodule_app
 #build 'docker-compose' build from this directory
-#run 'docker-compose run app sh' 
+#run 'docker-compose run app sh'
 services:
   app:
     build:
