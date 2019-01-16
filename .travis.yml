@@ -1,0 +1,17 @@
+language: python
+#The stable version of python with travis is 3.6
+# But we use 3.7 in out project. This does not matter
+# as we will be using travis only to run the docker image
+python:
+  - "3.6"
+
+services:
+  - docker
+
+before_script: pip install docker-compose
+
+# Defines what should be done automatically
+# If this exits with a failure, an email will be sent with bug report
+#flake8 is a linting tool that will analyse the code for potential errors
+script:
+  - docker-compose run app sh -c "python manage.py test && flake8"

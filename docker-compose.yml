@@ -1,0 +1,20 @@
+version: "3"
+
+# Default image name will be djangoapi-travisci-submodule_app
+#build 'docker-compose' build from this directory
+#run 'docker-compose run app sh' 
+services:
+  app:
+    build:
+      # path to dockerfile
+      context: .
+    ports:
+      # map port 8000 in host machine to 8000 in container
+      - "8000:8000"
+    volumes:
+      #synchronize app directory
+      - ./app:/app
+      #run server listening on all ip address on docker and map it to port 8000,
+      # which is inturn forwarded to port 8000 on host machine
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
