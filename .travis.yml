@@ -14,4 +14,4 @@ before_script: pip install docker-compose
 # If this exits with a failure, an email will be sent with bug report
 #flake8 is a linting tool that will analyse the code for potential errors
 script:
-  - docker-compose run app sh -c "python manage.py wait_for_db && python manage.py migrate && python manage.py test && flake8"
+  - docker-compose run app sh -c "python manage.py test && flake8"
