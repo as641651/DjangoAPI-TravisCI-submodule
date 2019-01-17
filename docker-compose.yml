@@ -17,4 +17,22 @@ services:
       #run server listening on all ip address on docker and map it to port 8000,
       # which is inturn forwarded to port 8000 on host machine
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    # These environments will be used in settings.py
+    environment:
+      - DB_HOST=db
+      - DB_NAME=app
+      - DB_USER=uname
+      - DB_PASS=password
+    depends_on:
+      - db
+
+  #database served as separate service
+  db:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=uname
+      - POSTGRES_PASSWORD=password
