@@ -37,3 +37,4 @@ class UserAdmin(BaseUserAdmin):
 # If we use the default admin class, we dont have to pass the second parameter
 # Here we modified the default adin class
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Tag)

@@ -32,6 +32,8 @@ services:
   #database served as separate service
   db:
     image: postgres:10-alpine
+    volumes:
+      - ./postgres:/var/lib/postgresql/data/
     environment:
       - POSTGRES_DB=app
       - POSTGRES_USER=uname

@@ -24,6 +24,20 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return get_user_model().objects.create_user(**validated_data)
 
+    # update a user, setting the password correctly and return it
+    def update(self, model_instance, validated_data):
+        # we have to upate password separately from other data
+        # so pop the password if it is available or return none as default
+        password = validated_data.pop('password', None)
+
+        # update all other fields in the model
+        user = super().update(model_instance, validated_data)
+        if password:
+            user.set_password(password)
+            user.save()
+
+        return user
+
 
 # Serializer can also be used without a model
 # Since this is not a model, we inherit from serializers.Serializer
