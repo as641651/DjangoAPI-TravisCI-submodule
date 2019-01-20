@@ -8,14 +8,16 @@ def sample_user(email="test@test.com", password="testpass"):
     return get_user_model().objects.create(email=email, password=password)
 
 
-class TagModelTests(TestCase):
+class RecipeModelTests(TestCase):
 
     # test the tag usage
-    def test_tag_str(self):
-        # only include mandatory fields
-        tag = models.Tag.objects.create(
+    def test_recipe_str(self):
+        # only include mandatory fields here
+        recipe = models.Recipe.objects.create(
             user=sample_user(),
-            name="Vegan"
+            title="Wheat pizza",
+            time_miniutes=5,
+            price=5.00
         )
 
-        self.assertEqual(str(tag), tag.name)
+        self.assertEqual(str(recipe), recipe.title)
