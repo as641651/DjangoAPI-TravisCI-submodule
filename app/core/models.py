@@ -3,6 +3,17 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                             PermissionsMixin
 # recommended way to retrieve settings from settings.py
 from django.conf import settings
+# to create unique id for files
+import uuid
+import os
+
+
+def recipe_image_file_path(instance, filename):
+    """ generate filepath for new image"""
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+
+    return os.path.join('uploads/recipe/', filename)
 
 
 # Creating CUSTOM USER MODEL
@@ -91,6 +102,11 @@ class Recipe(models.Model):
     # many to many field is just a repeatable foreign key field
     ingredients = models.ManyToManyField('Ingredient')
     tags = models.ManyToManyField('Tag')
+
+    # Image field
+    # calls a function to find the file path
+    # Input to this field is a file object
+    image = models.ImageField(null=True, upload_to=recipe_image_file_path)
 
     def __str__(self):
         return self.title

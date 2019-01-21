@@ -126,6 +126,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# 0.0.0.0:8000/static points to all static files
 STATIC_URL = '/static/'
+# 0.0.0.0:8000/media points to all media files
+MEDIA_URL = '/media/'
+
+# Location to store media and static files
+MEDIA_ROOT = '/vol/web/media'
+STATIC_ROOT = '/vol/web/static'
 
 AUTH_USER_MODEL = 'core.User'
