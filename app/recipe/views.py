@@ -17,6 +17,7 @@ class BaseRecepiAttr(viewsets.GenericViewSet,
                      mixins.ListModelMixin,
                      mixins.RetrieveModelMixin,
                      mixins.DestroyModelMixin,
+                     mixins.UpdateModelMixin,
                      mixins.CreateModelMixin):
 
     authentication_classes = (TokenAuthentication,)
@@ -130,7 +131,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
     # POST request to url to this appened with upload-image with pk arg(detail)
     # This function becomes a custom action = upload_image
     # API CALL (recipe-upload-image) : /api/recipe/recipes/<pk>/upload-image
-    @action(methods=['POST', 'DELETE'], detail=True, url_path='upload-image')
+    @action(methods=['GET', 'POST', 'DELETE'],
+            detail=True, url_path='upload-image')
     def upload_image(self, request, pk=None):
         # we have to encode our own Response
         # ie, we have to manually serialize our objects
@@ -150,3 +152,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 recipe.image.delete()
                 serializer = self.get_serializer(recipe)
                 return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            serializer = self.get_serializer(recipe)
+            return Response(serializer.data, status=status.HTTP_200_OK)

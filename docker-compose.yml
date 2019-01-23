@@ -14,6 +14,7 @@ services:
     volumes:
       #synchronize app directory
       - ./app:/app
+      - ../vol:/vol
       #run server listening on all ip address on docker and map it to port 8000,
       # which is inturn forwarded to port 8000 on host machine
     command: >

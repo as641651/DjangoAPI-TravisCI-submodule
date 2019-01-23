@@ -26,7 +26,7 @@ SECRET_KEY = 'q586zmaw65lj=u0+8@$&d30iz0a1!_xg-q1gsz0ctqyv_+++1g'
 DEBUG = True
 
 # 0.0.0.0 is required to access port from host machine when docker is run
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '10.0.2.2', '10.0.3.2', '192.168.1.2', '172.18.0.1']
 
 
 # Application definition
