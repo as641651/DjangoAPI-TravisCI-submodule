@@ -14,7 +14,10 @@ services:
     volumes:
       #synchronize app directory
       - ./app:/app
-      - ../data_vol:/vol
+      # map volumes only at production. permission errors in travis when mkdir is called.
+      # the local directory should be available before mapping. It should not be created from container
+      # see udemy Django Rest lec 27 response for recommended way
+      #- ../vol:/vol
       #run server listening on all ip address on docker and map it to port 8000,
       # which is inturn forwarded to port 8000 on host machine
     command: >
